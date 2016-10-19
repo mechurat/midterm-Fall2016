@@ -10,7 +10,7 @@ require('dotenv').config();
 
 Mongoose.connect(process.env.DB_URL)
 
-var portNum = process.env.PORT || 8080;
+var portNum = process.env.PORT || 8888;
 app.set('port', portNum);
 
 app.engine('handlebars', hbs({
