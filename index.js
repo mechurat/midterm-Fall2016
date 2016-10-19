@@ -1,7 +1,14 @@
 var express = require('express');
 var hbs = require('express-handlebars');
 
+var bodyParser = require('body-parser');
+var Mongoose = require('mongoose')
+
 var app = express();
+
+require('dotenv').config();
+
+Mongoose.connect(process.env.DB_URL)
 
 var portNum = process.env.PORT || 8080;
 app.set('port', portNum);
@@ -11,26 +18,27 @@ app.engine('handlebars', hbs({
 }));
 app.set('view engine', 'handlebars');
 
-//Get the /home url and apply handlebars template to it
-app.get('/', function (req, res, next) {
-    res.status(200);
-    res.render('home', {
-        company: 'Old Glory Tattoo Co.',
-        address: '',
-        hours: '',
-        phone: '',
-        artists: [
-            {
-                name: '',
-                style: '',
-                days: '',
-                tag: ''
-            },
-            ],
-        facebookURL: '',
-        galleryURL: '',
-    });
-});
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(bodyParser.json());
+
+
+
+//Get the /home url from the routes folder
+app.use('/home', require('./routes/home'));
+//Gallery route
+app.use('/gallery', require('./routes/gallery'));
+//Get the artist model
+var artist = require('./routes/artistData');
+app.use('/artists', artist);
+//Contact route
+app.use('/contact', require('.routes/contact'));
+//Admin route TEMP: Auto-verification
+//Will add verification URL later
+app.use('/admin/verified', require('.routes/admin'));
+
+
 
 //404 Catch all Error
 app.use(function (req, res, next) {
