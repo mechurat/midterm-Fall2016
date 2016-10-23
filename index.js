@@ -1,10 +1,12 @@
 var express = require('express');
+var router = express.Router();
 var hbs = require('express-handlebars');
 
 var bodyParser = require('body-parser');
 var Mongoose = require('mongoose')
 
 var app = express();
+module.exports = router;
 
 require('dotenv').config();
 
@@ -33,10 +35,10 @@ app.use('/gallery', require('./routes/gallery'));
 var artist = require('./routes/artistData');
 app.use('/artists', artist);
 //Contact route
-app.use('/contact', require('.routes/contact'));
+app.use('/contact', require('./routes/contact'));
 //Admin route TEMP: Auto-verification
 //Will add verification URL later
-app.use('/admin/verified', require('.routes/admin'));
+app.use('/admin/verified', require('./routes/admin'));
 
 
 

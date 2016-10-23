@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+module.exports = router;
+var app = express();
+
 var path = require('path');
 //Multer
 var multer = require('multer');
