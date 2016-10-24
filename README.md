@@ -6,3 +6,9 @@
 * Handlebars
   * Views
   * Layouts
+* Mongoose
+* Mongoose-url-slugs
+* multer (not used)
+* mongodb
+* dotenv
+* body-parser
