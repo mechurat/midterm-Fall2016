@@ -3,13 +3,18 @@ var Schema = mongoose.Schema;
 var URLSlugs = require('mongoose-url-slugs');
 
 var artistSchema = new Schema({
-    name: {
+    firstName: {
         type: String,
         required: true
     },
+	lastName:{
+		type: String,
+		required: true
+	},
     tag: {
         type: String,
-        required: true
+        required: true,
+		unique: true
     },
     artStyle: String,
     dateCreated:{
@@ -18,7 +23,7 @@ var artistSchema = new Schema({
     },
 });
 
-artistSchema.plugin(URLSlugs('name', {field:'slug'}));
+artistSchema.plugin(URLSlugs('lastName', {field:'slug'}));
 
 var Artist = mongoose.model('Artist', artistSchema);
 

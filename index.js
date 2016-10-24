@@ -1,12 +1,10 @@
 var express = require('express');
-var router = express.Router();
 var hbs = require('express-handlebars');
 
 var bodyParser = require('body-parser');
 var Mongoose = require('mongoose')
 
 var app = express();
-module.exports = router;
 
 require('dotenv').config();
 
@@ -25,26 +23,25 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-
-
 //Get the /home url from the routes folder
-app.use('/home', require('./routes/home'));
-//Gallery route
-app.use('/gallery', require('./routes/gallery'));
-//Get the artist model
+//app.use('/home', require('./routes/home'));
+////Gallery route
+//app.use('/gallery', require('./routes/gallery'));
+////Get the artist model
 var artist = require('./routes/artistData');
 app.use('/artists', artist);
-//Contact route
-app.use('/contact', require('./routes/contact'));
-//Admin route TEMP: Auto-verification
-//Will add verification URL later
-app.use('/admin/verified', require('./routes/admin'));
+////Contact route
+//app.use('/contact', require('./routes/contact'));
+////Admin route TEMP: Auto-verification
+////Will add verification URL later
+var adminTool = require('./routes/admin');
+app.use('/admin/verified', adminTool);
 
-
+app.use(express.static('public'));
 
 //404 Catch all Error
-app.use(function (req, res, next) {
-    console.log(err);
+app.use(function (req, res) {
+    console.log('err at catch all');
     res.status(404);
     res.send('404 - Not Found');
 });

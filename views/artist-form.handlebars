@@ -1,0 +1,95 @@
+<!--
+Base Selection || 3 Forms
+1. Add artist
+2. Edit artist
+3. Remove artist
+-->
+
+<div id="form-messages" style="display:none"></div>
+
+<label for="action">Select an action:<br></label>
+<select name="action" id="action">
+	<option value="">Choose here..</option>
+	<option value="add-artist">Add artist</option>
+	<option value="edit-artist">Edit artist</option>
+	<option value="delete-artist">Delete artist</option>
+</select>
+
+<br>
+<br>
+
+<!-- form for Add artist -->
+<div id="add-artist-form" style="display:none;">
+	<form id="add-artist" method="post">
+		<label for="first-name">First Name: </label>
+		<input type="text" id="first-name" name="firstName" required>
+
+		<label for="last-name">Last Name: </label>
+		<input type="text" id="last-name" name="lastName" required>
+		<br>
+		<label for="tag">Tag(for gallery search): </label>
+		<input type="text" id="tag" name="tag" required>
+
+		<label for="style">Artist Style: </label>
+		<input type="text" id="style" name="artStyle">
+
+		<br>
+		<label for="submit">Add artist</label>
+		<input type="submit" name="submit" id="add">
+	</form>
+</div>
+
+<!--
+Edit Artist:
+1. Drop down menu, pull artist names from database
+2. Display artist data
+3. Next to each data value, box edit data. Must be resubmitted
+-->
+<div id="edit-artist-form" style="display:none;">
+	<label for="select-artist">Select an artist to edit:<br></label>
+	<select name="select-artist" id="select-artist">
+			<option value="">Select artist</option>
+		{{#each artists}}
+			<option value="{{slug}}">{{firstName}} {{lastName}}</option>
+		{{/each}}
+	</select>
+	<div id="data-edit" style="display:none;">
+		<h3>Leave blank for no changes</h3>
+		<form id="edit-artist" method="post">
+			<label for="first-name">Edit first name: <br></label>
+			<input type="text" id="edit-first-name" name="firstName" value="{{artists.firstName}}">
+			<br>
+			<label for="last-name">Edit last name: <br></label>
+			<input type="text" id="edit-last-name" name="lastName" value="{{artists.lastName}}">
+			<br>
+			<label for="tag">Edit tag:<br></label>
+			<input type="text" id="edit-tag" name="tag" value="{{tag}}">
+			<br>
+			<label for="style">Edit art style:<br></label>
+			<input type="text" id="edit-style" name="style" value="{{artStyle}}">
+			<br>
+			<input type="submit" name="edit" id="edit">
+		</form>
+	</div>
+</div>
+
+<!--
+Delete Artist:
+1. Select menu: pull artist from database
+2. Delete artist button
+3. Alert confirmation
+-->
+<div id="delete-artist-form" style="display:none;">
+	<form id="delete-artist" method="get">
+		<label for="select-artist">Select an artist to delete:<br></label>
+		<select name="select-artist" id="d-select-artist">
+				<option value="" selected disabled>Select artist</option>
+			{{#each artists}}
+				<option value="{{slug}}">{{firstName}} {{lastName}}</option>
+			{{/each}}
+		</select>
+		<input type="submit" name="delete" id="delete">
+	</form>
+</div>
+
+<script type="text/javascript" src="../javascript/api.js"></script>
