@@ -1,4 +1,4 @@
-# Dynmaic Web Applications, Fall 2016 - Midterm
+# Dynamic Web Applications, Fall 2016 - Midterm
 
 ## Installed:
 * Node
