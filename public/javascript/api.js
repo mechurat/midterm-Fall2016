@@ -1,4 +1,5 @@
 $(document).ready(function () {
+	//Display the form to submit based on the first selection chosen.
 	$("#action").on('change', function () {
 		if ($(this).val() === 'add-artist') {
 			$('#add-artist-form').show();
